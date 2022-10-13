@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Weather App</h1>
+        <form id="form">
+            <p>Enter Location</p>
+            <label for="city">City</label>
+            <input type="text" name="city" id="cityInput" required>
+            <label for="state">State</label>
+            <select id="stateInput">
+                <option disabled selected value="default"> -- State -- </option>
+                <option value="default">N/A</option>
+            </select>
+            <label for="country">Country</label>
+            <select id="countryInput">
+                <option disabled selected value="default"> -- Country -- </option>
+            </select>
+            <button>Get Weather</button>
+        </form>
+    </main>
+</body>
+</html>
