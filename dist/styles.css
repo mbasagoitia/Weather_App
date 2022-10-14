@@ -1,0 +1,86 @@
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    background: url(../dist/img/weather-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#content-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    background: rgba(0, 0, 0, 0.65);
+    width: 75%;
+    height: 80vh;
+}
+
+h1 {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+#enter-location {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+#form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 80%;
+    margin-top: 1.5rem;
+}
+
+label {
+    visibility: hidden;
+}
+
+.input {
+    width: 30%;
+    max-width: 250px;
+    text-align: center;
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#cityInput, #stateInput, #countryInput {
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    padding: 5px;
+    padding-top: 3px;
+    display: block;
+    height: 1.8rem;
+    border: 1px solid black;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+#getWeatherBtn {
+    font-family: 'Nunito', sans-serif;
+    width: 50%;
+    max-width: 250px;
+}

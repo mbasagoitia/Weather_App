@@ -7,26 +7,36 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap" rel="stylesheet">
     <script src="main.js" defer></script>
 </head>
 <body>
     <main>
-        <h1>Weather App</h1>
-        <form id="form">
-            <p>Enter Location</p>
-            <label for="city">City</label>
-            <input type="text" name="city" id="cityInput" required>
-            <label for="state">State</label>
-            <select id="stateInput">
-                <option disabled selected value="default"> -- State -- </option>
-                <option value="default">N/A</option>
-            </select>
-            <label for="country">Country</label>
-            <select id="countryInput">
-                <option disabled selected value="default"> -- Country -- </option>
-            </select>
-            <button>Get Weather</button>
-        </form>
+        <div id="content-container">
+            <p id="enter-location">Enter Location</p>
+            <form id="form">
+                <div class="input">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="cityInput" placeholder = "City" required>
+                </div>
+                <div class="input">
+                    <label for="state">State</label>
+                    <select id="stateInput">
+                        <option disabled selected value="default"> State </option>
+                        <option value="default">N/A</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="country">Country</label>
+                    <select id="countryInput">
+                        <option disabled selected value="default"> Country </option>
+                    </select>
+                </div>
+                <button id="getWeatherBtn">Get Weather</button>
+            </form>
+        </div>
     </main>
 </body>
 </html>
