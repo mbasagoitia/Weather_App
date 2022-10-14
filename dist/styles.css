@@ -25,11 +25,16 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     background-color: black;
     background: rgba(0, 0, 0, 0.65);
     width: 75%;
-    height: 80vh;
+    min-height: 80vh;
+    height: fit-content;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    overflow: auto;
 }
 
 h1 {
@@ -39,7 +44,7 @@ h1 {
 }
 
 #enter-location {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-top: 2rem;
 }
 
@@ -67,7 +72,7 @@ label {
     gap: 0.5rem;
 }
 
-#cityInput, #stateInput, #countryInput {
+#cityInput, #stateInput, #countryInput, #getWeatherBtn {
     font-family: 'Nunito', sans-serif;
     box-sizing: border-box;
     padding: 5px;
@@ -80,7 +85,70 @@ label {
 }
 
 #getWeatherBtn {
-    font-family: 'Nunito', sans-serif;
-    width: 50%;
+    width: 30%;
     max-width: 250px;
+    background-color: black;
+    color: white;
+}
+
+#display-weather-content {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    min-height: 30vh;
+    margin-top: 2rem;
+    overflow: auto;
+    gap: 1rem;
+}
+
+.display-weather {
+    width: 30%;
+    max-width: 250px;
+    aspect-ratio: 1;
+    background-color: white;
+    color: black;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 854px) {
+
+    #content-container {
+        margin-top: 40px;
+    }
+
+    #form {
+        flex-direction: column;
+    }
+
+    label {
+        display: none;
+    }
+
+    .input, #getWeatherBtn {
+        width: 80%;
+    }
+
+    #display-weather-content {
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        gap: 1rem;
+    }
+
+    .display-weather {
+        width: 80%;
+        height: 30vh;
+    }
+
+}
+
+@media (max-width: 480px) {
+    #content-container {
+        padding: 10px;
+    }
+
+    .input, #getWeatherBtn, .display-weather {
+        width: 100%;
+    }
 }

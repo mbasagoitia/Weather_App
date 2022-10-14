@@ -72,3 +72,6 @@ form.addEventListener("submit", (e) => {
     createQuery();
     fetchData(query);
 })
+
+//unhide the weather display boxes on form submit
+//populate them with relevant data

@@ -19,7 +19,7 @@
             <form id="form">
                 <div class="input">
                     <label for="city">City</label>
-                    <input type="text" name="city" id="cityInput" placeholder = "City" required>
+                    <input type="text" name="city" id="cityInput" placeholder = "City" required autocomplete="off">
                 </div>
                 <div class="input">
                     <label for="state">State</label>
@@ -36,6 +36,11 @@
                 </div>
                 <button id="getWeatherBtn">Get Weather</button>
             </form>
+            <div id="display-weather-content">
+                <div id="temperature" class="display-weather"></div>
+                <div id="conditions" class="display-weather"></div>
+                <div id="other-info" class="display-weather"></div>
+            </div>
         </div>
     </main>
 </body>
