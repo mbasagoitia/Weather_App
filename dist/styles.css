@@ -32,8 +32,8 @@ main {
     width: 75%;
     min-height: 80vh;
     height: fit-content;
-    margin-bottom: 40px;
-    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     overflow: auto;
 }
 
@@ -66,7 +66,6 @@ label {
     width: 30%;
     max-width: 250px;
     text-align: center;
-    padding: 0.2rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -102,11 +101,26 @@ label {
 }
 
 .display-weather {
-    width: 30%;
+    box-sizing: border-box;
+    width: 25vw;
     max-width: 250px;
     aspect-ratio: 1;
     background-color: white;
     color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.display-weather span {
+    text-align: center;
+}
+
+#temp, #main {
+    font-size: 3rem;
 }
 
 /* MEDIA QUERIES */
@@ -115,6 +129,7 @@ label {
 
     #content-container {
         margin-top: 40px;
+        width: 60%;
     }
 
     #form {
@@ -125,8 +140,8 @@ label {
         display: none;
     }
 
-    .input, #getWeatherBtn {
-        width: 80%;
+    .input, #getWeatherBtn, .display-weather {
+        width: 100%;
     }
 
     #display-weather-content {
@@ -136,19 +151,13 @@ label {
         gap: 1rem;
     }
 
-    .display-weather {
-        width: 80%;
-        height: 30vh;
-    }
-
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+
     #content-container {
         padding: 10px;
+        width: 75%;
     }
 
-    .input, #getWeatherBtn, .display-weather {
-        width: 100%;
-    }
 }

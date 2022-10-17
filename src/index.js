@@ -65,6 +65,17 @@ function createQuery () {
     }
 }
 
+//unhide the weather display boxes on form submit
+//populate them with relevant data
+
+const tempDisplay = document.querySelector("#temperature")
+const conditionsDisplay = document.querySelector("#conditions")
+const otherDisplay = document.querySelector("#other-info")
+
+function displayWeather () {
+    
+}
+
 const form = document.querySelector("#form");
 
 form.addEventListener("submit", (e) => {
@@ -73,5 +84,3 @@ form.addEventListener("submit", (e) => {
     fetchData(query);
 })
 
-//unhide the weather display boxes on form submit
-//populate them with relevant data
