@@ -74,31 +74,104 @@ const conditionsDisplay = document.querySelector("#conditions")
 const otherDisplay = document.querySelector("#other-info")
 
 const degrees = document.querySelector("#temp");
+const feelsLike = document.querySelector("#feelsLike");
+const highLow = document.querySelector("#highLow");
 
-function displayWeather (weatherObj) {
+const description = document.querySelector("#description");
+
+const windSpeed = document.querySelector("#windSpeed");
+const visibility = document.querySelector("#visibility");
+const humidity = document.querySelector("#humidity");
+
+function displayWeather (weatherObj, unitFunc) {
     console.log(weatherObj);
     const degreesKelvin = weatherObj.main.temp;
-    degrees.textContent = `${celsius(degreesKelvin)}°`;
+    degrees.textContent = `${unitFunc(degreesKelvin)}°`;
+
+    const feelsLikeDegrees = weatherObj.main.feels_like;
+    feelsLike.textContent = `Feels like ${unitFunc(feelsLikeDegrees)}°`;
+
+    const high = Math.round(unitFunc(weatherObj.main.temp_max));
+    const low = Math.round(unitFunc(weatherObj.main.temp_min));
+    highLow.innerHTML = `<span class="bold">H:</span> ${high} <span class="bold">L:</span> ${low}`;
+
+    let capitalizedDescription = (weatherObj.weather[0].description).replace(/^./, weatherObj.weather[0].description[0].toUpperCase());
+    description.textContent = capitalizedDescription;
+
+    let mpsToMph = 2.23694;
+    let windSpeedMPH = Math.round(weatherObj.wind.speed*mpsToMph);
+    let direction;
+    if (weatherObj.wind.deg == 0 || weatherObj.wind.deg == 360) {
+        direction = "E";
+    } else if (weatherObj.wind.deg == 90) {
+        direction = "N";
+    } else if (weatherObj.wind.deg == 180) {
+        direction = "W";
+    } else if (weatherObj.wind.deg == 270) {
+        direction = "S";
+    }else if (weatherObj.wind.deg > 270) {
+        direction = "SE";
+    } else if (weatherObj.wind.deg > 180) {
+        direction = "SW";
+    } else if (weatherObj.wind.deg > 90) {
+        direction = "NW";
+    } else if (weatherObj.wind.deg > 0) {
+        direction = "NE";
+    }
+
+    windSpeed.textContent = `${windSpeedMPH}mph ${direction} winds`;
+
+    let metersToMiles = 0.000621371;
+    let visibilityMiles = Math.round(weatherObj.visibility*metersToMiles*10)/10;
+    visibility.textContent = `Visibility of ${visibilityMiles} miles`;
+
+    humidity.textContent = `${weatherObj.main.humidity}% humidity`;
 }
 
 //convert Kelvin to Fahrenheit and Celsius
-function celsius(value) {
+function celsiusConverter(value) {
     return Math.round(value-273.15);
 }
 
-function fahrenheit (value) {
+function fahrenheitConverter (value) {
     return Math.round(1.8*(value-273) + 32);
 }
 
-
-
 const form = document.querySelector("#form");
+const unitSwitchBtn = document.querySelector("#unit-switch-button");
+let activeUnit = "celsius";
+let returnedObj;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     createQuery();
-    fetchData(query).then((result) => {
-        return result;
-    }).then((result) => displayWeather(result));
+    if (unitSwitchBtn.checked) {
+        fetchData(query).then((result) => {
+            return result;
+        }).then((result) => {
+            returnedObj = result;
+            activeUnit = "fahrenheit";
+            displayWeather(returnedObj, fahrenheitConverter);
+        });
+    } else {
+        fetchData(query).then((result) => {
+            return result;
+        }).then((result) => {
+            returnedObj = result;
+            activeUnit = "celsius";
+            displayWeather(returnedObj, celsiusConverter);
+        });
+    }
 })
+
+unitSwitchBtn.addEventListener("change", () => {
+    if (activeUnit == "fahrenheit") {
+        activeUnit = "celsius";
+        displayWeather(returnedObj, celsiusConverter);
+    } else {
+        activeUnit = "fahrenheit";
+        displayWeather(returnedObj, fahrenheitConverter);
+    }
+})
+
 
