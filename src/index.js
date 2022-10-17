@@ -5,6 +5,7 @@ const API_KEY = `fa7e5e1656b4a1aab9d8f97ada8a1f68`;
 
 //make the request based upon user input (query)
 //first, convert query to latitude and longitude, then make the weather API call
+
 async function fetchData (query) {
     let res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${query}&appid=${API_KEY}`);
     let data = await res.json();
@@ -14,7 +15,7 @@ async function fetchData (query) {
         let res = await fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
         let data = await res.json();
         try {
-            console.log(data);
+            return data;
         }
         catch (err) {
             console.error(err);
@@ -72,15 +73,32 @@ const tempDisplay = document.querySelector("#temperature")
 const conditionsDisplay = document.querySelector("#conditions")
 const otherDisplay = document.querySelector("#other-info")
 
-function displayWeather () {
-    
+const degrees = document.querySelector("#temp");
+
+function displayWeather (weatherObj) {
+    console.log(weatherObj);
+    const degreesKelvin = weatherObj.main.temp;
+    degrees.textContent = `${celsius(degreesKelvin)}°`;
 }
+
+//convert Kelvin to Fahrenheit and Celsius
+function celsius(value) {
+    return Math.round(value-273.15);
+}
+
+function fahrenheit (value) {
+    return Math.round(1.8*(value-273) + 32);
+}
+
+
 
 const form = document.querySelector("#form");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     createQuery();
-    fetchData(query);
+    fetchData(query).then((result) => {
+        return result;
+    }).then((result) => displayWeather(result));
 })
 

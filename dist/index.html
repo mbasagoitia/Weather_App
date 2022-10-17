@@ -18,18 +18,18 @@
             <p id="enter-location">Enter Location</p>
             <form id="form">
                 <div class="input">
-                    <label for="city">City</label>
+                    <label class="label" for="city">City</label>
                     <input type="text" name="city" id="cityInput" placeholder = "City" required autocomplete="off">
                 </div>
                 <div class="input">
-                    <label for="state">State</label>
+                    <label class="label" for="state">State</label>
                     <select id="stateInput">
                         <option disabled selected value="default">State</option>
                         <option value="default">N/A</option>
                     </select>
                 </div>
                 <div class="input">
-                    <label for="country">Country</label>
+                    <label class="label" for="country">Country</label>
                     <select id="countryInput">
                         <option disabled selected value="default">Country</option>
                     </select>
@@ -40,7 +40,15 @@
                 <div id="temperature" class="display-weather">
                     <span id="temp">75&#176</span>
                     <span id="feelsLike">feels like 50deg</span>
-                    <span id="highLow">H: 50 L: 30</span>
+                    <span id="highLow">H: 50 L: 30</span>  
+                    <div id="unit-switch">
+                        <span class="unit unit-1">C</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="unit unit-2">F</span>
+                    </div>
                 </div>
                 <div id="conditions" class="display-weather">
                     <span id="main">Cloudy AF</span>
@@ -49,6 +57,7 @@
                 <div id="other-info" class="display-weather">
                     <span id="windSpeed">10mph NW wind</span>
                     <span id="visibility">visibility</span>
+                    <span id="humidity">humidity</span>
                 </div>
             </div>
         </div>
