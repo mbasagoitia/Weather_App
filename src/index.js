@@ -75,6 +75,8 @@ const tempDisplay = document.querySelector("#temperature")
 const conditionsDisplay = document.querySelector("#conditions")
 const otherDisplay = document.querySelector("#other-info")
 
+const displayArea = document.querySelector("#display-weather-content");
+
 const degrees = document.querySelector("#temp");
 const feelsLike = document.querySelector("#feelsLike");
 const highLow = document.querySelector("#highLow");
@@ -88,8 +90,19 @@ const humidity = document.querySelector("#humidity");
 const body = document.querySelector("body");
 const title = document.querySelector("#title-area");
 
+const saveAreaBtn = document.querySelector("#saveAreaBtn");
+const resetBtn = document.querySelector("#resetBtn");
+
+const savedAreasList = document.querySelector("#saved-areas-list");
+
 function displayWeather (weatherObj, unitFunc) {
     console.log(weatherObj);
+    displayArea.classList.remove("hidden");
+    saveAreaBtn.classList.remove("not-visible");
+    resetBtn.classList.remove("not-visible");
+    saveAreaBtn.classList.add("visible");
+    resetBtn.classList.add("visible");
+
 
     if (initialData[0].state == undefined) {
         title.textContent = `Weather for ${initialData[0].name}, ${initialData[0].country}`;
@@ -133,10 +146,12 @@ function displayWeather (weatherObj, unitFunc) {
     let capitalizedDescription = (weatherObj.weather[0].description).replace(/^./, weatherObj.weather[0].description[0].toUpperCase());
     description.textContent = capitalizedDescription;
 
-    let mpsToMph = 2.23694;
+    const mpsToMph = 2.23694;
     let windSpeedMPH = Math.round(weatherObj.wind.speed*mpsToMph);
     let direction;
-    if (weatherObj.wind.deg == 0 || weatherObj.wind.deg == 360) {
+    if (weatherObj.wind.speed == 0) {
+        direction = "";
+    }else if (weatherObj.wind.deg == 0 || weatherObj.wind.deg == 360) {
         direction = "E";
     } else if (weatherObj.wind.deg == 90) {
         direction = "N";
@@ -156,11 +171,34 @@ function displayWeather (weatherObj, unitFunc) {
 
     windSpeed.textContent = `${windSpeedMPH}mph ${direction} winds`;
 
-    let metersToMiles = 0.000621371;
+    const metersToMiles = 0.000621371;
     let visibilityMiles = Math.round(weatherObj.visibility*metersToMiles*10)/10;
     visibility.textContent = `Visibility of ${visibilityMiles} miles`;
 
     humidity.textContent = `${weatherObj.main.humidity}% humidity`;
+
+    saveAreaBtn.addEventListener("click", addToList);
+}
+
+
+function addToList () {
+    let found = false;
+    if (Array.from(savedAreasList.children).length === 9) {
+        //issues here
+        alert("You have reached the maximum number of saved areas.");
+        saveAreaBtn.classList.add("hidden");
+    } else {
+        Array.from(savedAreasList.children).forEach((element) => {
+            if (element.innerText == initialData[0].name) {
+                found = true;
+            }
+        });
+        if (found == false) {
+            const li = document.createElement("li");
+            li.textContent = initialData[0].name;
+            savedAreasList.appendChild(li);
+        }
+    }
 }
 
 //convert Kelvin to Fahrenheit and Celsius

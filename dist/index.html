@@ -16,6 +16,10 @@
     <main>
         <div id="content-container">
             <h1 id="title-area">Get Local Weather</h1>
+            <div id="saved-areas">
+                <ul id="saved-areas-list">
+                </ul>
+            </div>
             <form id="form">
                 <div class="input">
                     <label class="label" for="city">City</label>
@@ -34,9 +38,13 @@
                         <option disabled selected value="default">Country</option>
                     </select>
                 </div>
-                <button id="getWeatherBtn">Get Weather</button>
+                <div id="button-area">
+                    <button id="saveAreaBtn" class="not-visible">Save Area</button>
+                    <button id="getWeatherBtn">Get Weather</button>
+                    <button id="resetBtn" class="not-visible">Reset Saved Areas</button>
+                </div>
             </form>
-            <div id="display-weather-content">
+            <div id="display-weather-content" class="hidden">
                 <div id="temperature" class="display-weather">
                     <span id="temp"></span>
                     <span id="feelsLike"></span>
