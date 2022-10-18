@@ -5,12 +5,14 @@ const API_KEY = `fa7e5e1656b4a1aab9d8f97ada8a1f68`;
 
 //make the request based upon user input (query)
 //first, convert query to latitude and longitude, then make the weather API call
+let initialData;
 
 async function fetchData (query) {
     let res = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${query}&appid=${API_KEY}`);
     let data = await res.json();
     let lat = data[0].lat;
     let lon = data[0].lon;
+    initialData = data;
     try {
         let res = await fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
         let data = await res.json();
@@ -83,8 +85,41 @@ const windSpeed = document.querySelector("#windSpeed");
 const visibility = document.querySelector("#visibility");
 const humidity = document.querySelector("#humidity");
 
+const body = document.querySelector("body");
+const title = document.querySelector("#title-area");
+
 function displayWeather (weatherObj, unitFunc) {
     console.log(weatherObj);
+
+    if (initialData[0].state == undefined) {
+        title.textContent = `Weather for ${initialData[0].name}, ${initialData[0].country}`;
+    } else {
+        title.textContent = `Weather for ${initialData[0].name}, ${initialData[0].state}, ${initialData[0].country}`;
+    }
+
+    //set appropriate background image
+    if (weatherObj.weather[0].main == "Clear") {
+        body.classList.remove("rain-bg");
+        body.classList.remove("snow-bg");
+        body.classList.remove("cloud-bg");
+        body.classList.add("sun-bg");
+    } else if (weatherObj.weather[0].main == "Thunderstorm" || weatherObj.weather[0].main == "Drizzle" || weatherObj.weather[0].main == "Rain") {
+        body.classList.remove("sun-bg");
+        body.classList.remove("snow-bg");
+        body.classList.remove("cloud-bg");
+        body.classList.add("rain-bg");
+    } else if (weatherObj.weather[0].main == "Snow") {
+        body.classList.remove("rain-bg");
+        body.classList.remove("sun-bg");
+        body.classList.remove("cloud-bg");
+        body.classList.add("snow-bg");
+    } else if (weatherObj.weather[0].main == "Clouds") {
+        body.classList.remove("rain-bg");
+        body.classList.remove("snow-bg");
+        body.classList.remove("sun-bg");
+        body.classList.add("cloud-bg");
+    } 
+
     const degreesKelvin = weatherObj.main.temp;
     degrees.textContent = `${unitFunc(degreesKelvin)}°`;
 

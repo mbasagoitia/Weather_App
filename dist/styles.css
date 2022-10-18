@@ -43,7 +43,7 @@ h1 {
     text-align: center;
 }
 
-#enter-location {
+#title-area {
     font-size: 2rem;
     margin-top: 2rem;
 }
@@ -178,14 +178,30 @@ h1 {
     width: 25vw;
     max-width: 250px;
     aspect-ratio: 1;
-    background-color: white;
     color: black;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+}
+
+.cloud-bg {
+    background-image: url(../dist/img/clouds.gif);
+}
+
+.sun-bg {
+    background-image: url(../dist/img/sun2.gif);
+}
+
+.rain-bg {
+    background-image: url(../dist/img/rain.gif);
+}
+
+.snow-bg {
+    background-image: url(../dist/img/snow.gif);
 }
 
 #other-info {
