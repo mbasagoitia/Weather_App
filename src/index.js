@@ -68,8 +68,6 @@ function createQuery () {
     }
 }
 
-//unhide the weather display boxes on form submit
-//populate them with relevant data
 
 const tempDisplay = document.querySelector("#temperature")
 const conditionsDisplay = document.querySelector("#conditions")
@@ -89,6 +87,7 @@ const humidity = document.querySelector("#humidity");
 
 const body = document.querySelector("body");
 const title = document.querySelector("#title-area");
+const timeStamp = document.querySelector("#timestamp");
 
 const saveAreaBtn = document.querySelector("#saveAreaBtn");
 const resetBtn = document.querySelector("#resetBtn");
@@ -96,12 +95,21 @@ const resetBtn = document.querySelector("#resetBtn");
 const savedAreasList = document.querySelector("#saved-areas-list");
 
 function displayWeather (weatherObj, unitFunc) {
-    console.log(weatherObj);
     displayArea.classList.remove("hidden");
     saveAreaBtn.classList.remove("not-visible");
     resetBtn.classList.remove("not-visible");
     saveAreaBtn.classList.add("visible");
     resetBtn.classList.add("visible");
+
+    let time = weatherObj.dt;
+
+    let date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let seconds = "0" + date.getSeconds();
+
+    let formattedTime = `${hours}:${minutes.substring(minutes.length-2)}:${seconds.substring(seconds.length-2)}`;
+    timeStamp.textContent = `Updated at ${formattedTime}`;
 
 
     if (initialData[0].state == undefined) {
@@ -184,22 +192,49 @@ const warning = document.querySelector("#warning");
 
 function addToList () {
     let found = false;
-    if (Array.from(savedAreasList.children).length === 2) {
-        warning.classList.remove("not-visible");
-        setTimeout(() => {
-            warning.classList.add("not-visible");
-        }, 3000)
-        saveAreaBtn.disabled = "disabled";
-    } else {
+    
+       if (Array.from(savedAreasList.children).length < 10) {
         Array.from(savedAreasList.children).forEach((element) => {
             if (element.innerText == initialData[0].name) {
                 found = true;
             }
         });
         if (found == false) {
+            let newSavedArea = {
+                name: initialData[0].name,
+                searchQuery: query
+            };
             const li = document.createElement("li");
-            li.textContent = initialData[0].name;
+            li.textContent = newSavedArea.name;
             savedAreasList.appendChild(li);
+            if (Array.from(savedAreasList.children).length == 9) {
+                warning.classList.remove("not-visible");
+                setTimeout(() => {
+                    warning.classList.add("not-visible");
+                }, 3000)
+                saveAreaBtn.disabled = "disabled";
+                saveAreaBtn.classList.add("disabled");
+            }
+            li.addEventListener("click", () => {
+                if (unitSwitchBtn.checked) {
+                    fetchData(newSavedArea.searchQuery).then((result) => {
+                        return result;
+                    }).then((result) => {
+                        returnedObj = result;
+                        activeUnit = "fahrenheit";
+                        displayWeather(returnedObj, fahrenheitConverter);
+                    });
+                } else {
+                    fetchData(newSavedArea.searchQuery).then((result) => {
+                        return result;
+                    }).then((result) => {
+                        returnedObj = result;
+                        activeUnit = "celsius";
+                        displayWeather(returnedObj, celsiusConverter);
+                    });
+                }
+                form.reset();
+            })
         }
     }
 }
@@ -250,4 +285,8 @@ unitSwitchBtn.addEventListener("change", () => {
     }
 })
 
+//make reset list button work
+resetBtn.addEventListener("click", () => {
+    savedAreasList.innerHTML = "";
+})
 

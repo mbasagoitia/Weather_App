@@ -23,6 +23,7 @@ main {
 
 #content-container {
     padding: 20px;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -41,6 +42,7 @@ h1 {
     font-size: 2rem;
     padding: 1rem;
     text-align: center;
+    line-height: 2.2rem;
 }
 
 #title-area {
@@ -59,9 +61,26 @@ h1 {
     gap: 1rem;
 }
 
+#saved-areas-list li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 50%;    
+}
+
 #warning {
     font-size: 0.8rem;
     color: red;
+    text-align: center;
+}
+
+#timestamp {
+    font-size: 0.8rem;
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 #form {
@@ -71,7 +90,6 @@ h1 {
     justify-content: center;
     gap: 1rem;
     width: 80%;
-    margin-top: 1rem;
 }
 
 .label {
@@ -91,7 +109,7 @@ h1 {
     font-family: 'Nunito', sans-serif;
     box-sizing: border-box;
     padding: 5px;
-    padding-top: 3px;
+    padding-top: 2.5px;
     display: block;
     height: 1.8rem;
     border: 1px solid black;
@@ -193,15 +211,15 @@ h1 {
     display: flex;
     justify-content: space-evenly;
     width: 80%;
-    min-height: 30vh;
-    margin-top: 2rem;
+    min-height: 25vh;
+    margin-top: 1.2rem;
     overflow: auto;
     gap: 1rem;
 }
 
 .display-weather {
     box-sizing: border-box;
-    width: 25vw;
+    width: 20vw;
     max-width: 250px;
     aspect-ratio: 1;
     color: white;
@@ -309,6 +327,7 @@ h1 {
         align-items: center;
         width: 80%;
         gap: 1rem;
+        margin-bottom: 1rem;
     }
 
 }
