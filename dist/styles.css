@@ -59,6 +59,11 @@ h1 {
     gap: 1rem;
 }
 
+#warning {
+    font-size: 0.8rem;
+    color: red;
+}
+
 #form {
     display: flex;
     flex-wrap: wrap;

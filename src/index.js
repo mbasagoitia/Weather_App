@@ -180,13 +180,16 @@ function displayWeather (weatherObj, unitFunc) {
     saveAreaBtn.addEventListener("click", addToList);
 }
 
+const warning = document.querySelector("#warning");
 
 function addToList () {
     let found = false;
-    if (Array.from(savedAreasList.children).length === 9) {
-        //issues here
-        alert("You have reached the maximum number of saved areas.");
-        saveAreaBtn.classList.add("hidden");
+    if (Array.from(savedAreasList.children).length === 2) {
+        warning.classList.remove("not-visible");
+        setTimeout(() => {
+            warning.classList.add("not-visible");
+        }, 3000)
+        saveAreaBtn.disabled = "disabled";
     } else {
         Array.from(savedAreasList.children).forEach((element) => {
             if (element.innerText == initialData[0].name) {
