@@ -65,6 +65,8 @@ function createQuery () {
         query = `${city}, ${state}, us`;
     } else if (state == "default") {
         query = `${city}, ${country}`;
+    } else {
+        query = `${city}, ${state}, ${country}`;
     }
 }
 
