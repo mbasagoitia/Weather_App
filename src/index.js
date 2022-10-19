@@ -1,7 +1,7 @@
 // CONVERTER_API_URL = http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key};
 // WEATHER_API_URL = https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
-const API_KEY = `fa7e5e1656b4a1aab9d8f97ada8a1f68`;
+import { API_KEY } from "./keys";
 
 //make the request based upon user input (query)
 //first, convert query to latitude and longitude, then make the weather API call
