@@ -67,8 +67,8 @@ function createQuery () {
         query = `${city}, ${country}`;
     } else {
         query = `${city}, ${state}, ${country}`;
-        console.log(query);
     }
+    console.log(query);
 }
 
 
